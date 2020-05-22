@@ -9,4 +9,16 @@ In order to have this script run by our EC2 instance, we need to create a securi
 
 To access the server need then to run:
 
-+ curl http://<EC2_PUBLIC_IP>:8080
+* curl http://<EC2_PUBLIC_IP>:8080
+
+
+When dealing with multiple servers, you need to:
+
+* create a Launch Configuration instead of an instance
+* configure an Auto Scaling Group, where you need to specify min, max instances and AZs for the Launch Configuration.
+* configure a Load Balancer, with its security group, and add it into the ASG
+* configure an Health Check on your cluster, allowing outbound requests in the security group of the Load Balancer.
+
+To access the server need then to run:
+
+* curl http://<ELB_DNS_NAME>
